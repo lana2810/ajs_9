@@ -2,15 +2,13 @@ import { Magician, Daemon } from "../practice_1";
 import ArrayBufferConverter from "../practice_2";
 
 test("test1", () => {
-  const player1 = new Magician("alex");
-  player1.setAttack(100);
-  player1.getAttack(2);
+  const player1 = new Magician("alex", 2);
+  player1.attack = 100;
   expect(player1.attack).toBe(90);
 
-  const player2 = new Daemon("maksim");
-  player2.setStoned(true);
-  player2.setAttack(100);
-  player2.getAttack(2);
+  const player2 = new Daemon("maksim", 2);
+  player2.stoned = true;
+  player2.attack = 100;
   expect(player2.attack).toBe(85);
 });
 

@@ -1,32 +1,37 @@
 export class Character {
-  constructor(name, type) {
+  constructor(name, type, distance) {
     this.name = name;
     this.type = type;
+    this.distance = distance;
   }
-  setAttack(value) {
-    this.attack = value;
+
+  set stoned(value = false) {
+    this._stoned = value;
   }
-  setStoned(value = false) {
-    this.stoned = value;
+  get stoned() {
+    return this._stoned;
   }
-  getStoned() {
-    return this.stoned;
+
+  set attack(value) {
+    this._attack = value;
   }
-  getAttack(distance) {
-    this.attack -= this.attack * 0.1 * (distance - 1);
-    if (this.stoned) {
-      this.attack -= 5 * Math.log2(distance);
+  get attack() {
+    let value = this._attack * (1.1 - 0.1 * this.distance);
+
+    if (this._stoned) {
+      value = value - 5 * Math.log2(this.distance);
     }
+    return Math.round(value);
   }
 }
 export class Magician extends Character {
-  constructor(name) {
-    super(name, "Magician");
+  constructor(name, distance) {
+    super(name, "Magician", distance);
   }
 }
 
 export class Daemon extends Character {
-  constructor(name) {
-    super(name, "Daemon");
+  constructor(name, distance) {
+    super(name, "Daemon", distance);
   }
 }
